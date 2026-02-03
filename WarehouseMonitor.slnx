@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="WarehouseMonitor.Application/WarehouseMonitor.Application.csproj" />
+  <Project Path="WarehouseMonitor.Domain/WarehouseMonitor.Domain.csproj" />
+  <Project Path="WarehouseMonitor.Infrastructure/WarehouseMonitor.Infrastructure.csproj" />
+  <Project Path="WarehouseMonitor.Web/WarehouseMonitor.Web.csproj" Id="159b7089-a833-4d75-833b-6eeef542d92c" />
+</Solution>
