@@ -17,7 +17,7 @@ public class Product : BaseEntity
 
     private Product() { } // EF core support
 
-    public Product(string name, string sku, ProductType type)
+    public Product(string name, string sku, ProductType type = ProductType.Standard)
     {
         Name = name;
         SKU = sku;

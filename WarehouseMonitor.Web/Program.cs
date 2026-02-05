@@ -1,4 +1,5 @@
 
+using WarehouseMonitor.Application;
 using WarehouseMonitor.Infrastructure;
 using WarehouseMonitor.Infrastructure.Data;
 
@@ -11,6 +12,7 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 
