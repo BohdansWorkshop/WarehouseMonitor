@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WarehouseMonitor.Application.Common.Interfaces;
-using WarehouseMonitor.Application.Products.Commands;
+using WarehouseMonitor.Application.Products.Commands.Create;
+using WarehouseMonitor.Application.Products.Commands.Delete;
+using WarehouseMonitor.Application.Products.Commands.Update;
 using WarehouseMonitor.Application.Products.Queries;
 using WarehouseMonitor.Domain.Entities;
 
@@ -19,18 +19,34 @@ public class ProductsController : ControllerBase
         _mediator = mediator;
     }
 
-    // GET: api/Products
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
     {
         return Ok(await _mediator.Send(new GetProductsQuery()));
     }
 
-    // POST: api/Products
     [HttpPost]
     public async Task<ActionResult<Product>> CreateProduct(Product product)
     {
         await _mediator.Send(new CreateProductCommand(product.Name, product.SKU));
         return Ok(product);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<bool>> UpdateProduct(Guid id, Product product)
+    {
+        if(id != product.Id)
+        {
+            return BadRequest("Route Id and Product.Id do not match."););
+        }
+        var isUpdated = await _mediator.Send(new UpdateProductCommand(product));
+        return isUpdated ? NoContent() : BadRequest();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteProduct(Guid id)
+    {
+        var isDeleted = await _mediator.Send(new DeleteProductCommand(id));
+        return isDeleted ? NoContent() : NotFound();
     }
 }

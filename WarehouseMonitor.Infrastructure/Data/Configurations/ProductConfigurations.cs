@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using WarehouseMonitor.Domain.Constants;
 using WarehouseMonitor.Domain.Entities;
 
 namespace WarehouseMonitor.Infrastructure.Persistence.Configurations;
@@ -11,11 +12,11 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.HasKey(p => p.Id);
 
         builder.Property(p => p.Name)
-            .HasMaxLength(250)
+            .HasMaxLength(ValidationConstants.Product.NameMaxLength)
             .IsRequired();
 
         builder.Property(p => p.SKU)
-            .HasMaxLength(50)
+            .HasMaxLength(ValidationConstants.Product.SkuMaxLength)
             .IsUnicode(false)
             .IsRequired();
 
@@ -23,11 +24,10 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .IsUnique();
 
         builder.Property(p => p.Description)
-            .HasMaxLength(1000);
+            .HasMaxLength(ValidationConstants.Product.DescriptionMaxLength);
 
         builder.Property(p => p.Type)
             .HasConversion<string>()
-            .HasMaxLength(50)
             .IsRequired();
     }
 }

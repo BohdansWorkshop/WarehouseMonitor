@@ -8,12 +8,12 @@ namespace WarehouseMonitor.Domain.Entities;
 
 public class Product : BaseEntity
 {
-    public string Name { get; private set; } = string.Empty;
-    public string SKU { get; private set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    public string SKU { get; set; } = string.Empty;
     
-    public string Description { get; private set; } = string.Empty; 
+    public string Description { get; set; } = string.Empty; 
 
-    public ProductType Type { get; private set; }
+    public ProductType Type { get; set; }
 
     private Product() { } // EF core support
 
