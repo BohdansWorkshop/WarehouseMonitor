@@ -11,9 +11,9 @@ public class Product : BaseEntity
     public string Name { get; set; } = string.Empty;
     public string SKU { get; set; } = string.Empty;
     
-    public string Description { get; set; } = string.Empty; 
+    public string Description { get; set; } = string.Empty;
 
-    public ProductType Type { get; set; }
+    public ProductType Type { get; set; } = ProductType.Standard;
 
     private Product() { } // EF core support
 

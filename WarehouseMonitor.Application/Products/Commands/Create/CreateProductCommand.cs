@@ -2,7 +2,7 @@
 using WarehouseMonitor.Application.Common.Interfaces;
 using WarehouseMonitor.Domain.Entities;
 
-namespace WarehouseMonitor.Application.Products.Commands
+namespace WarehouseMonitor.Application.Products.Commands.Create
 {
     public record CreateProductCommand(string Name, string Sku) : IRequest<Guid>;
 

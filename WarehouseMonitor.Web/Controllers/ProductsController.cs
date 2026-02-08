@@ -26,10 +26,10 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Product>> CreateProduct(Product product)
+    public async Task<ActionResult<Guid>> CreateProduct(Product product)
     {
-        await _mediator.Send(new CreateProductCommand(product.Name, product.SKU));
-        return Ok(product);
+        var id = await _mediator.Send(new CreateProductCommand(product.Name, product.SKU));
+        return Ok(id);
     }
 
     [HttpPut("{id}")]
@@ -37,7 +37,7 @@ public class ProductsController : ControllerBase
     {
         if(id != product.Id)
         {
-            return BadRequest("Route Id and Product.Id do not match."););
+            return BadRequest("Route Id and Product.Id do not match.");
         }
         var isUpdated = await _mediator.Send(new UpdateProductCommand(product));
         return isUpdated ? NoContent() : BadRequest();

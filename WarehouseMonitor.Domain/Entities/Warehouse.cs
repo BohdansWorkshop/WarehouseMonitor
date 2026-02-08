@@ -7,9 +7,9 @@ namespace WarehouseMonitor.Domain.Entities;
 
 public class Warehouse : BaseEntity
 {
-    public string Name { get; private set; }
-    public string BranchCode { get; private set; }
-    public string Address { get; private set; }
+    public string Name { get; set; }
+    public string BranchCode { get; set; }
+    public string Address { get; set; }
 
     private Warehouse() { } // EF Core support
 
