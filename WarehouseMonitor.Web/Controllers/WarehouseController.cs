@@ -32,7 +32,7 @@ public class WarehouseController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id:guid}")]
     public async Task<ActionResult<bool>> UpdateWarehouse(Guid id, Warehouse warehouse)
     {
         if (id != warehouse.Id)
@@ -44,7 +44,7 @@ public class WarehouseController : ControllerBase
         return result ? NoContent() : BadRequest();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:guid}")]
     public async Task<ActionResult<bool>> DeleteWarehouse(Guid id)
     {
         var result = await _mediator.Send(new DeleteWarehouseCommand(id));

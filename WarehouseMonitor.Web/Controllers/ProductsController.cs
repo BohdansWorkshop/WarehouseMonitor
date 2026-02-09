@@ -32,7 +32,7 @@ public class ProductsController : ControllerBase
         return Ok(id);
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id:guid}")]
     public async Task<ActionResult<bool>> UpdateProduct(Guid id, Product product)
     {
         if(id != product.Id)
@@ -43,7 +43,7 @@ public class ProductsController : ControllerBase
         return isUpdated ? NoContent() : BadRequest();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:guid}")]
     public async Task<ActionResult> DeleteProduct(Guid id)
     {
         var isDeleted = await _mediator.Send(new DeleteProductCommand(id));

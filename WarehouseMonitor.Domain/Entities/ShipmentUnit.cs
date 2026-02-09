@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WarehouseMonitor.Domain.Common;
+﻿using WarehouseMonitor.Domain.Common;
 using WarehouseMonitor.Domain.Enums;
 
 namespace WarehouseMonitor.Domain.Entities;
 
 public class ShipmentUnit : BaseEntity
-{
-    public string TrackingNumber { get; private set; } = string.Empty;
-    public ShipmentStatus Status { get; private set; }
+{ 
+   public string TrackingNumber { get; set; }
+    public ShipmentStatus Status { get; set; }
 
-    public decimal Weight { get; private set; }
-    public decimal Volume { get; private set; }
+    public decimal Weight { get; set; }
+    public decimal Volume { get; set; }
 
-    public Guid ProductId { get; private set; } 
-    public Product Product { get; private set; } = null!;   
+    public Guid ProductId { get; set; } 
 
-    public Guid? CurrentWarehouseId { get; private set; }
-    public Warehouse? CurrentWarehouse { get; private set; }
+    public Guid? CurrentWarehouseId { get; set; }
+    public Warehouse? CurrentWarehouse { get; set; }
 
     private ShipmentUnit() { } // EF Core support
 
