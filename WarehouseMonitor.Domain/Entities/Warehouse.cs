@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WarehouseMonitor.Domain.Common;
+﻿using WarehouseMonitor.Domain.Common;
 
 namespace WarehouseMonitor.Domain.Entities;
 

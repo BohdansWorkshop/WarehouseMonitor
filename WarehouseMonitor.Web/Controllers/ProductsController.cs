@@ -49,4 +49,4 @@ public class ProductsController : ControllerBase
         var isDeleted = await _mediator.Send(new DeleteProductCommand(id));
         return isDeleted ? NoContent() : NotFound();
     }
-}
+} 

@@ -8,5 +8,6 @@ public enum ShipmentStatus
     Arrived = 4,
     Delivered = 5,
     Lost = 6,
-    Damaged = 7
-}
+    Damaged = 7,
+    Cancelled = 8
+} 
