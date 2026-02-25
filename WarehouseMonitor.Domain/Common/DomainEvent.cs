@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace WarehouseMonitor.Domain.Common
+﻿namespace WarehouseMonitor.Domain.Common
 {
     public abstract class DomainEvent 
     {

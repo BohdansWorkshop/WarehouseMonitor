@@ -6,18 +6,18 @@ namespace WarehouseMonitor.Domain.Entities;
 
 public class ShipmentUnit : BaseEntity
 {
-    public string TrackingNumber { get; private set; } = string.Empty;
-    public ShipmentStatus Status { get; private set; }
-    public decimal Weight { get; private set; }
-    public decimal Volume { get; private set; }
+    public string TrackingNumber { get; set; } = string.Empty;
+    public ShipmentStatus Status { get; set; }
+    public decimal Weight { get; set; }
+    public decimal Volume { get; set; }
 
-    public Guid ProductId { get; private set; }
-    public Product Product { get; private set; } = null!;
+    public Guid ProductId { get; set; }
+    public Product Product { get; set; } = null!;
 
-    public Guid? CurrentWarehouseId { get; private set; }
-    public Warehouse? CurrentWarehouse { get; private set; }
+    public Guid? CurrentWarehouseId { get; set; }
+    public Warehouse? CurrentWarehouse { get; set; }
 
-    public Guid? TargetWarehouseId { get; private set; }
+    public Guid? TargetWarehouseId { get; set; }
 
     private ShipmentUnit() { } // EF Core
 
@@ -46,6 +46,7 @@ public class ShipmentUnit : BaseEntity
 
         CurrentWarehouseId = warehouseId;
         Status = ShipmentStatus.Received;
+        RaiseEvent(new ShipmentUnitReceivedEvent(Id, warehouseId));
     }
 
     public void Ship(Guid targetWarehouseId)
@@ -67,8 +68,6 @@ public class ShipmentUnit : BaseEntity
         if (Status != ShipmentStatus.InTransit)
             throw new InvalidOperationException("Only in-transit shipments can be delivered");
 
-        CurrentWarehouseId = TargetWarehouseId;
-        TargetWarehouseId = null;
         Status = ShipmentStatus.Delivered;
 
         RaiseEvent(new ShipmentUnitDeliveredEvent(Id));
@@ -81,5 +80,7 @@ public class ShipmentUnit : BaseEntity
 
         Status = ShipmentStatus.Cancelled;
         TargetWarehouseId = null;
+
+        RaiseEvent(new ShipmentUnitCancelledEvent(Id));
     }
 }
