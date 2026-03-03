@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using WarehouseMonitor.Application.Common.Interfaces;
-using WarehouseMonitor.Domain.Entities;
+using WarehouseMonitor.Domain.Enums;
 
 namespace WarehouseMonitor.Application.Products.Commands.Update;
 
-public record UpdateProductCommand(Product product) : IRequest<bool>;
+public record UpdateProductCommand(ProductDto product) : IRequest<bool>;
 
 public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, bool>
 {
@@ -25,7 +25,12 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand,
 
         updatedEntity.Description = command.product.Description;
         updatedEntity.Name = command.product.Name;
-        updatedEntity.Type = command.product.Type;
+        if (!Enum.TryParse<ProductType>(command.product.Type, true, out var parsedType))
+        {
+            throw new ArgumentException($"Invalid product type: {command.product.Type}");
+        }
+
+        updatedEntity.Type = parsedType;
         updatedEntity.SKU = command.product.SKU;
         updatedEntity.LastModified= DateTime.UtcNow;
 

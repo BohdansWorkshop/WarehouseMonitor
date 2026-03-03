@@ -66,7 +66,7 @@ public class ShipmentUnitTests
     public void ReceiveTwice_Should_Throw()
     {
         var shipment = new ShipmentUnit("TRK", 10, 5, Guid.NewGuid());
-        shipment.ReceiveAtWarehouse(Guid.NewGuid());
+        shipment.Status = ShipmentStatus.Delivered;
 
         Action act = () => shipment.ReceiveAtWarehouse(Guid.NewGuid());
 

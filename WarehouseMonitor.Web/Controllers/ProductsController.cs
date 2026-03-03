@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using WarehouseMonitor.Application.Products;
 using WarehouseMonitor.Application.Products.Commands.Create;
 using WarehouseMonitor.Application.Products.Commands.Delete;
 using WarehouseMonitor.Application.Products.Commands.Update;
 using WarehouseMonitor.Application.Products.Queries;
-using WarehouseMonitor.Domain.Entities;
 
 namespace WarehouseMonitor.Web.Controllers;
 
@@ -20,20 +20,20 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
     {
         return Ok(await _mediator.Send(new GetProductsQuery()));
     }
 
     [HttpPost]
-    public async Task<ActionResult<Guid>> CreateProduct(Product product)
+    public async Task<ActionResult<Guid>> CreateProduct(ProductDto product)
     {
         var id = await _mediator.Send(new CreateProductCommand(product.Name, product.SKU));
         return Ok(id);
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<ActionResult<bool>> UpdateProduct(Guid id, Product product)
+    public async Task<ActionResult<bool>> UpdateProduct(Guid id, ProductDto product)
     {
         if(id != product.Id)
         {

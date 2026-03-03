@@ -8,7 +8,6 @@ using WarehouseMonitor.Application.Common.Interfaces;
 using WarehouseMonitor.Infrastructure.Data;
 using WarehouseMonitor.Infrastructure.Data.Interceptors;
 using WarehouseMonitor.Infrastructure.Identity;
-using Microsoft.AspNetCore.Identity;
 
 namespace WarehouseMonitor.Infrastructure;
 

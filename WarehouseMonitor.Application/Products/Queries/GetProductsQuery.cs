@@ -1,13 +1,12 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using WarehouseMonitor.Application.Common.Interfaces;
-using WarehouseMonitor.Domain.Entities;
 
 namespace WarehouseMonitor.Application.Products.Queries;
 
-public record GetProductsQuery : IRequest<IEnumerable<Product>>;
+public record GetProductsQuery : IRequest<IEnumerable<ProductDto>>;
 
-public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, IEnumerable<Product>>
+public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, IEnumerable<ProductDto>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -16,8 +15,19 @@ public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, IEnumer
         _context = context;
     }
 
-    public async Task<IEnumerable<Product>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<ProductDto>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Products.ToListAsync(cancellationToken);
+        var entities = await _context.Products
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return entities.Select(p => new ProductDto
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Description = p.Description,
+            SKU = p.SKU,
+            Type = p.Type.ToString()
+        });
     }
 }

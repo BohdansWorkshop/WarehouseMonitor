@@ -1,10 +1,9 @@
 ﻿using MediatR;
 using WarehouseMonitor.Application.Common.Interfaces;
-using WarehouseMonitor.Domain.Entities;
 
 namespace WarehouseMonitor.Application.Warehouses.Commands.Update;
 
-public record UpdateWarehouseCommand(Warehouse warehouse) : IRequest<bool>;
+public record UpdateWarehouseCommand(WarehouseDto warehouse) : IRequest<bool>;
 public class UpdateWarehouseCommandHandler : IRequestHandler<UpdateWarehouseCommand, bool>
 {
     private readonly IApplicationDbContext _dbContext;

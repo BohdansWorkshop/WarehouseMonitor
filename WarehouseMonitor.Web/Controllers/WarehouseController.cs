@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using WarehouseMonitor.Application.Warehouses;
 using WarehouseMonitor.Application.Warehouses.Commands.Create;
 using WarehouseMonitor.Application.Warehouses.Commands.Delete;
 using WarehouseMonitor.Application.Warehouses.Commands.Update;
 using WarehouseMonitor.Application.Warehouses.Queries;
-using WarehouseMonitor.Domain.Entities;
 
 namespace WarehouseMonitor.Web.Controllers;
 
@@ -20,20 +20,20 @@ public class WarehouseController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Warehouse>>> GetWarehouses()
+    public async Task<ActionResult<IEnumerable<WarehouseDto>>> GetWarehouses()
     {
         return Ok(await _mediator.Send(new GetWarehousesQuery()));
     }
 
     [HttpPost]
-    public async Task<ActionResult<Guid>> CreateWarehouse(Warehouse warehouse)
+    public async Task<ActionResult<Guid>> CreateWarehouse(WarehouseDto warehouse)
     {
         var result = await _mediator.Send(new CreateWarehouseCommand(warehouse.Name, warehouse.BranchCode, warehouse.Address));
         return Ok(result);
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<ActionResult<bool>> UpdateWarehouse(Guid id, Warehouse warehouse)
+    public async Task<ActionResult<bool>> UpdateWarehouse(Guid id, WarehouseDto warehouse)
     {
         if (id != warehouse.Id)
         {

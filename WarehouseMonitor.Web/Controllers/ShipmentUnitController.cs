@@ -4,7 +4,7 @@ using WarehouseMonitor.Application.ShipmentUnits.Commands.Create;
 using WarehouseMonitor.Application.ShipmentUnits.Commands.Update;
 using WarehouseMonitor.Application.ShipmentUnits.Commands.Delete;
 using WarehouseMonitor.Application.ShipmentUnits.Queries;
-using WarehouseMonitor.Domain.Entities;
+using WarehouseMonitor.Application.ShipmentUnits;
 
 namespace WarehouseMonitor.Web.Controllers;
 
@@ -20,7 +20,7 @@ public class ShipmentUnitsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ShipmentUnit>>> GetShipmentUnits()
+    public async Task<ActionResult<IEnumerable<ShipmentUnitDto>>> GetShipmentUnits()
     {
         var units = await _mediator.Send(new GetShipmentUnitsQuery());
         return Ok(units);
