@@ -9,7 +9,7 @@
 ---
 
 ## 🎯 Project Purpose
-This repository serves as a technical bridge, demonstrating the application of high-level engineering principles — honed over **8 years in IT** (including 6 years of custom engine development) — within the modern **.NET 8 ecosystem**. It showcases my transition from proprietary, low-level systems to industry-standard C# frameworks.
+This repository serves as a technical bridge, demonstrating the application of high-level engineering principles.
 
 ---
 
